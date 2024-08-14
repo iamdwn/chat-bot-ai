@@ -54,7 +54,7 @@ namespace WpfApp
                 UserInputTextBox.Clear();
 
                 string aiResponse = await session.SendMessageAsync(userInput);
-                AddMessageToChat("Gemini AI", aiResponse);
+                AddMessageToChat("Bot", aiResponse);
             }
         }
 
