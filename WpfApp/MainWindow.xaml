@@ -8,10 +8,9 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <TextBox Name="ChatHistoryTextBox" 
+        <RichTextBox Name="ChatHistoryRichTextBox" 
                  VerticalScrollBarVisibility="Auto" 
                  IsReadOnly="True" 
-                 TextWrapping="Wrap" 
                  Margin="10"/>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10">

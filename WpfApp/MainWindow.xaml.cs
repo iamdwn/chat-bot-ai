@@ -42,7 +42,7 @@ namespace WpfApp
             session = model.StartChat(new StartChatParams());
             //apiKey = Environment.GetEnvironmentVariable(apiKey, EnvironmentVariableTarget.User);
             //model = new GeminiProVision(apiKey);
-            session = model.StartChat(new StartChatParams());
+            //session = model.StartChat(new StartChatParams());
         }
 
         private async void SendButton_Click(object sender, RoutedEventArgs e)
@@ -58,11 +58,39 @@ namespace WpfApp
             }
         }
 
+        //private void AddMessageToChat(string sender, string message)
+        //{
+        //    ChatHistoryTextBox.AppendText($"{sender}: {message}\n\n");
+        //    ChatHistoryTextBox.ScrollToEnd();
+        //}
+
         private void AddMessageToChat(string sender, string message)
         {
-            ChatHistoryTextBox.AppendText($"{sender}: {message}\n");
-            ChatHistoryTextBox.ScrollToEnd();
+            TextBlock messageTextBlock = new TextBlock
+            {
+                Text = $"{message}",
+                TextWrapping = TextWrapping.Wrap,
+                Margin = new Thickness(5)
+            };
+
+            Border messageBorder = new Border
+            {
+                BorderBrush = Brushes.Gray,
+                BorderThickness = new Thickness(1),
+                CornerRadius = new CornerRadius(5),
+                Background = (sender == "You") ? Brushes.LightBlue : Brushes.LightGray,
+                Margin = new Thickness(10, 5, 10, 5),
+                Child = messageTextBlock,
+                HorizontalAlignment = (sender == "You") ? HorizontalAlignment.Right : HorizontalAlignment.Left
+            };
+            BlockUIContainer blockUIContainer = new BlockUIContainer(messageBorder);
+
+            ChatHistoryRichTextBox.Document.Blocks.Add(blockUIContainer);
+
+            ChatHistoryRichTextBox.ScrollToEnd();
         }
+
+
 
         //private async void UploadImageButton_Click(object sender, RoutedEventArgs e)
         //{
@@ -100,7 +128,6 @@ namespace WpfApp
             if (e.Key == Key.Enter)
             {
                 SendButton_Click(sender, e);
-                //e.Handled = true;
             }
         }
 
